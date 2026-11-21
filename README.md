@@ -2,7 +2,7 @@
 A lib to make ARM V7 ASM easier.
 
 This is a static library for assembly code.
-As known, assembly code is long in writing. For example, to write "Hello, World!\n" into stdout, you have to write:
+As known, assembly code is long in writing. For example, to write "Hello, World!\n" into stdout, you have to code:
 
 ```asm (pseudocode)
 <...>
@@ -38,6 +38,7 @@ This library, on the current moment, provides these functions:
 - **print**: writes text ends with "\0" (.asciz) in the end and automatically adds "\n" at the end.
   - INPUT:   r0 - address to the .asciz string to write.
   - RETURNS: nothing.
+  - REGISTERS USED: r0, r1, r2, r3.
 - **exit**: exits from the program with status 0 (sucess).
   - INPUT:   nothing.
   - RETURNS: nothing.
