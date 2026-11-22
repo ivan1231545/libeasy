@@ -28,7 +28,7 @@ bl print
 bl exit
 
 .data
-msg_to_write: .asciz "Hello, World!\n"
+msg_to_write: .asciz "Hello, World!"
 ```
 
 # Functions
