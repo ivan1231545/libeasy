@@ -2,7 +2,7 @@
 A lib to make ARM V7 ASM easier.
 
 This is a static library for assembly code.
-As known, assembly code is long in writing. For example, to write "Hello, World!\n" into stdout, you have to write:
+As known, assembly code is long in writing. For example, to write "Hello, World!\n" into stdout, you have to code:
 
 ```asm (pseudocode)
 <...>
@@ -28,19 +28,44 @@ bl print
 bl exit
 
 .data
-msg_to_write: .asciz "Hello, World!\n"
+msg_to_write: .asciz "Hello, World!"
 ```
 
 # Functions
 
-This library, on the current moment, provides these functions:
+At the moment, this library provides these functions:
 
-- **print**: writes text ends with "\0" (.asciz) in the end and automatically adds "\n" at the end.
+- **print**: writes null-terminated text (.asciz) in the end and automatically adds "\n" at the end.
   - INPUT:   r0 - address to the .asciz string to write.
   - RETURNS: nothing.
-- **exit**: exits from the program with status 0 (sucess).
+  - REGISTERS USED: r0, r1, r2, r3.
+- **exit**: exits from the program with status 0 (success).
   - INPUT:   nothing.
   - RETURNS: nothing.
+  - REGISTERS USED: nothing.
 - **countsym**: counts symbols of the string given.
   - INPUT:   r0 - address to the .asciz string to count symbols.
   - RETURNS: r0 - count of the symbols with \0
+  - REGISTERS USED: r0.
+
+# Compiling
+
+For compiling a file with the lib, you have to specify -L<path/to/lib> and -leasy flags to the compiler, for example:
+
+```bash
+clang -nostdlib -static -Wl,--entry=_start -o test test.s -L. -leasy
+```
+
+# Integrating with C
+This lib can be integrated with C. Usage then:
+```c
+extern void print(const char *msg);
+//extern void exit(); NOTE: this coflicts with libc function
+extern int countsym(const char *line);
+int main()
+{
+    print("Hello, World!");
+    return countsym("");
+    // exit();
+}
+```
