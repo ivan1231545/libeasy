@@ -35,7 +35,11 @@ msg_to_write: .asciz "Hello, World!"
 
 At the moment, this library provides these functions:
 
-- **print**: writes null-terminated text (.asciz) in the end and automatically adds "\n" at the end.
+- **writeln**: writes a null-terminated text (.asciz) and automatically adds "\n" at the end.
+  - INPUT:   r0 - address to the .asciz string to write.
+  - RETURNS: nothing.
+  - REGISTERS USED: r0, r1, r2, r3.
+- **write**: writes a null-terminated text (.asciz).
   - INPUT:   r0 - address to the .asciz string to write.
   - RETURNS: nothing.
   - REGISTERS USED: r0, r1, r2, r3.
