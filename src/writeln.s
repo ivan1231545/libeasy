@@ -1,6 +1,6 @@
-.global print
+.global writeln
 .text
-print:
+writeln:
 	push { r4, r5, r6, lr }
 	
 	mov r4, #0
