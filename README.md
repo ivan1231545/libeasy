@@ -63,12 +63,12 @@ clang -nostdlib -static -Wl,--entry=_start -o test test.s -L. -leasy
 # Integrating with C
 This lib can be integrated with C. Usage then:
 ```c
-extern void print(const char *msg);
+extern void writeln(const char *msg);
 //extern void exit(); NOTE: this coflicts with libc function
 extern int countsym(const char *line);
 int main()
 {
-    print("Hello, World!");
+    writeln("Hello, World!");
     return countsym("");
     // exit();
 }
